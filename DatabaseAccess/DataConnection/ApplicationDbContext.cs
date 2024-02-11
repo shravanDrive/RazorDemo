@@ -1,17 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RazorWeb.Model;
+using RazorModels.Model;
 
-namespace RazorWeb.Data
+
+namespace DatabaseAccess.DataConnection
 {
-    /// <summary>
-    /// DB Context file created to connect to the Database
-    /// </summary>
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
         public DbSet<Category> Category { get; set; }
+        public DbSet<FoodType> FoodType { get; set; }
     }
 }

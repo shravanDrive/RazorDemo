@@ -1,9 +1,9 @@
+using DatabaseAccess.DataConnection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorWeb.Data;
-using RazorWeb.Model;
+using RazorModels.Model;
 
-namespace RazorWeb.Pages.Categories
+namespace RazorWeb.Pages.Admin.Categories
 {
     /// <summary>
     /// IndexModel for Categories table
