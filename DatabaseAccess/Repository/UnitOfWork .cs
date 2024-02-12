@@ -26,6 +26,7 @@ namespace DatabaseAccess.Repository
 			_db = db;
 			Category = new CategoryRepository(_db);
 			FoodType = new FoodTypeRepository(_db);
+			MenuItem = new MenuItemRepository(_db);
 		}
 
 		/// <summary>
@@ -37,6 +38,11 @@ namespace DatabaseAccess.Repository
 		/// listing out all repositories
 		/// </summary>
 		public IFoodTypeRepository FoodType { get; private set; }
+
+		/// <summary>
+		/// MenuItemRepository 
+		/// </summary>
+		public IMenuItemRepository MenuItem { get; private set; }
 
 		/// <summary>
 		/// to delte object
