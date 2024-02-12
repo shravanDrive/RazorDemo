@@ -1,4 +1,5 @@
 using DatabaseAccess.DataConnection;
+using DatabaseAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorModels.Model;
@@ -14,7 +15,8 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// <summary>
 		/// Application Db context for connection to the database
 		/// </summary>
-		private readonly ApplicationDbContext _db;
+		//private readonly ApplicationDbContext _db;
+		private readonly IUnitOfWork _unitOfWork;
 
 		/// <summary>
 		/// Food Type for 2 way Binding
@@ -25,9 +27,9 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// Constructor used for Dependency Injection
 		/// </summary>
 		/// <param name="db"></param>
-		public EditModel(ApplicationDbContext db)
+		public EditModel(IUnitOfWork unitOfWork)
 		{
-			_db = db;
+			_unitOfWork = unitOfWork;
 		}
 
 		/// <summary>
@@ -36,7 +38,8 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// <param name="id"></param>
 		public void OnGet(int id)
 		{
-			FoodType = _db.FoodType.Find(id);
+			FoodType = _unitOfWork.FoodType.GetFirstOrDefault(u => u.Id == id);
+			//FoodType = _db.FoodType.Find(id);
 			//Category = _db.Category.FirstOrDefault(u=>u.Id==id);
 			//Category = _db.Category.SingleOrDefault(u=>u.Id==id);
 			//Category = _db.Category.Where(u => u.Id == id).FirstOrDefault();
@@ -50,8 +53,10 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		{
 			if (ModelState.IsValid)
 			{
-				_db.FoodType.Update(FoodType);
-				await _db.SaveChangesAsync();
+				_unitOfWork.FoodType.Update(FoodType);
+				_unitOfWork.Save();
+				//_db.FoodType.Update(FoodType);
+				//await _db.SaveChangesAsync();
 				TempData["success"] = "FoodType updated successfully";
 				return RedirectToPage("Index");
 			}

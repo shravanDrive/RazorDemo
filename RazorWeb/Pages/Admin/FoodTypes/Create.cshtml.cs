@@ -1,4 +1,5 @@
 using DatabaseAccess.DataConnection;
+using DatabaseAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorModels.Model;
@@ -14,7 +15,8 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// <summary>
 		/// Application DB context instance for database connection
 		/// </summary>
-		private readonly ApplicationDbContext _db;
+		//private readonly ApplicationDbContext _db;
+		private readonly IUnitOfWork _unitOfWork;
 
 		/// <summary>
 		/// 2 way Binding property of FoodType
@@ -25,9 +27,9 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// Constructor used for dependency injection
 		/// </summary>
 		/// <param name="db"></param>
-		public CreateModel(ApplicationDbContext db)
+		public CreateModel(IUnitOfWork unitOfWork)
 		{
-			_db = db;
+			_unitOfWork = unitOfWork;
 		}
 
 		/// <summary>
@@ -46,8 +48,8 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 
 			if (ModelState.IsValid)
 			{
-				await _db.FoodType.AddAsync(FoodType);
-				await _db.SaveChangesAsync();
+				_unitOfWork.FoodType.Add(FoodType);
+				_unitOfWork.Save();
 				TempData["success"] = "FoodType created successfully";
 				return RedirectToPage("Index");
 			}

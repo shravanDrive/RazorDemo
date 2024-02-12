@@ -1,4 +1,5 @@
 using DatabaseAccess.DataConnection;
+using DatabaseAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorModels.Model;
@@ -14,7 +15,8 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// <summary>
 		/// Application DB COntext for database Connection
 		/// </summary>
-		private readonly ApplicationDbContext _db;
+		//private readonly ApplicationDbContext _db;
+		private readonly IUnitOfWork _unitOfWork;
 
 		/// <summary>
 		/// 2-way Binding food type property method
@@ -25,9 +27,9 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// Delete Model Constructor
 		/// </summary>
 		/// <param name="db"></param>
-		public DeleteModel(ApplicationDbContext db)
+		public DeleteModel(IUnitOfWork unitOfWork)
 		{
-			_db = db;
+			_unitOfWork = unitOfWork;
 		}
 
 		/// <summary>
@@ -36,7 +38,8 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// <param name="id"></param>
 		public void OnGet(int id)
 		{
-			FoodType = _db.FoodType.Find(id);
+			FoodType = _unitOfWork.FoodType.GetFirstOrDefault(u => u.Id == id);
+			//FoodType = _db.FoodType.Find(id);
 			//Category = _db.Category.FirstOrDefault(u=>u.Id==id);
 			//Category = _db.Category.SingleOrDefault(u=>u.Id==id);
 			//Category = _db.Category.Where(u => u.Id == id).FirstOrDefault();
@@ -48,11 +51,11 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// <returns></returns>
 		public async Task<IActionResult> OnPost()
 		{
-			var foodTypeFromDb = _db.FoodType.Find(FoodType.Id);
-			if (foodTypeFromDb != null)
+			var foodTypeFromDb = _unitOfWork.FoodType.GetFirstOrDefault(u => u.Id == FoodType.Id);
+			if (foodTypeFromDb != null)				
 			{
-				_db.FoodType.Remove(foodTypeFromDb);
-				await _db.SaveChangesAsync();
+				_unitOfWork.FoodType.Remove(foodTypeFromDb);
+				_unitOfWork.Save();
 				TempData["success"] = "FoodType deleted successfully";
 				return RedirectToPage("Index");
 
