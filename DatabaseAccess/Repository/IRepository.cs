@@ -41,6 +41,17 @@ namespace DatabaseAccess.Repository
 		/// <param name=""></param>
 		/// <returns></returns>
 		IEnumerable<T> GetAll(string? includeProperties=null);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="filter"></param>
+		/// <param name="orderby"></param>
+		/// <param name="includeProperties"></param>
+		/// <returns></returns>
+		IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, 
+			Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null, 
+			string? includeProperties = null);
 		/// <summary>
 		/// Getting the first or default record back to the user
 		/// </summary>
