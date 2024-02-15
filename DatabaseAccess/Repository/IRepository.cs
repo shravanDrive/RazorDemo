@@ -59,5 +59,13 @@ namespace DatabaseAccess.Repository
 		/// <returns></returns>
 		T GetFirstOrDefault(Expression<Func<T,bool>>? filter=null);
 
-	}
+		/// <summary>
+		/// GetFirst or Default with orderby clause
+		/// </summary>
+		/// <param name="filter"></param>
+		/// <param name="includeProperties"></param>
+		/// <returns></returns>
+        T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
+
+    }
 }
