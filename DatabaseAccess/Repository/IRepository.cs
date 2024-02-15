@@ -35,6 +35,13 @@ namespace DatabaseAccess.Repository
 		/// <returns>return type is iEnumerable just because it returns more than one object</returns>
 		IEnumerable<T> GetAll();
 		/// <summary>
+		/// Defines what are the properties that you want to include when we are getting all the results back
+		/// </summary>
+		/// <param name=""></param>
+		/// <param name=""></param>
+		/// <returns></returns>
+		IEnumerable<T> GetAll(string? includeProperties=null);
+		/// <summary>
 		/// Getting the first or default record back to the user
 		/// </summary>
 		/// <param name="filter">of type expression so that we can add .SingleOrDefault(x=>x.id==id) in the argument</param>
