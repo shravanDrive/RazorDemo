@@ -59,7 +59,19 @@
 ###
 
 <div align="center">
-  <img height="200" src="https://github.com/shravanDrive/RazorDemo/blob/master/RazorWeb/wwwroot/images/Demo%20Screenshots/Home%20Page.png"  />
+  <img height="700" src="https://github.com/shravanDrive/RazorDemo/blob/master/RazorWeb/wwwroot/images/Demo%20Screenshots/HomePage%202.png"  />
+</div>
+
+###
+
+<div align="center">
+  <img height="700" src="https://github.com/shravanDrive/RazorDemo/blob/master/RazorWeb/wwwroot/images/Demo%20Screenshots/Details%20Page.png"  />
+</div>
+
+###
+
+<div align="center">
+  <img height="700" src="https://github.com/shravanDrive/RazorDemo/blob/master/RazorWeb/wwwroot/images/Demo%20Screenshots/Menu%20List%20Items%20on%20Datatables.png"  />
 </div>
 
 ###
