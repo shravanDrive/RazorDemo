@@ -10,7 +10,7 @@
 
 ###
 
-<p align="left">- Entity Framework Core ✅<br> - Repository Design Pattern for Entity Framework ✅<br> - CRUD Razor Pages ✅<br> - N-Tier Architecture ✅<br>- Admin Mode & Customer Mode ✅<br> - Identity Management 🛠️<br> - Stripe Payment 🛠️<br> - Session handling 🛠️<br> - Send Email using SMTP 🛠️<br> - Social Login (Facebook) 🛠️<br><br>Future Features - <br> - Azure Deployments 💡</p>
+<p align="left">- Entity Framework Core ✅<br> - Repository Design Pattern for Entity Framework ✅<br> - CRUD Razor Pages Development ✅<br> - N-Tier Architecture ✅<br>- Admin Mode & Customer Mode ✅<br> - Identity Management 🛠️<br> - Stripe Payment 🛠️<br> - Session handling 🛠️<br> - Send Email using SMTP 🛠️<br> - Social Login (Facebook) 🛠️<br><br>Future Features - <br> - Azure Deployments 💡</p>
 
 ###
 
