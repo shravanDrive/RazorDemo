@@ -37,6 +37,7 @@ namespace RazorWeb.Pages.Admin.FoodTypes
 		/// </summary>
 		public void OnGet()
         {
+            
         }
 
 		/// <summary>

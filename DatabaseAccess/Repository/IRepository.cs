@@ -67,5 +67,7 @@ namespace DatabaseAccess.Repository
 		/// <returns></returns>
         T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
 
+        Task<IEnumerable<T>> ExecuteStoredProcedureAsync(string storedProcedureName, params object[] parameters);
+
     }
 }

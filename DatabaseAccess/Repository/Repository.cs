@@ -132,6 +132,11 @@ namespace DatabaseAccess.Repository
             return query.FirstOrDefault();
         }
 
+        public async Task<IEnumerable<T>> ExecuteStoredProcedureAsync(string storedProcedureName, params object[] parameters)
+        {
+            return await _db.Set<T>().FromSqlRaw(storedProcedureName, parameters).ToListAsync();
+        }
+
         /// <summary>
         /// Deletes the record
         /// </summary>

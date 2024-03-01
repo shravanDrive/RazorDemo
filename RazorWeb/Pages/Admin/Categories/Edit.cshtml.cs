@@ -39,5 +39,10 @@ namespace RazorWeb.Pages.Admin.Categories
 			}
 			return Page();
 		}
+
+		//public IActionResult OnPostIncrement()
+		//{
+		//	return Page();
+		//}
 	}
 }

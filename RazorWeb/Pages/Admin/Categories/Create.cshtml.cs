@@ -2,7 +2,10 @@ using DatabaseAccess.DataConnection;
 using DatabaseAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 using RazorModels.Model;
+using System.Data;
 
 
 namespace RazorWeb.Pages.Admin.Categories
@@ -35,9 +38,9 @@ namespace RazorWeb.Pages.Admin.Categories
         {
 			_unitOfWork = unitOfWork;
 		}
-        public void OnGet()
-        {			
-		}
+        public async void OnGet()
+        {
+        }
 
 		/// <summary>
 		/// Add the new category object to the database
@@ -58,5 +61,42 @@ namespace RazorWeb.Pages.Admin.Categories
 			}
 			return Page();
 		}
+
+		/// <summary>
+		/// Experimenting to check on Stored procedure calls from Entity Framework Core
+		/// </summary>
+		public async void ExpSPCall()
+		{
+            try
+            {
+                IEnumerable<Guid> studentIds = new List<Guid>
+            {
+                Guid.Parse("08BFC8F0-41D8-4490-B507-39911F5AFF0D")  // Example Guid 1
+			};
+
+                DataTable table = new DataTable();
+                table.Columns.Add("ID", typeof(Guid));
+                foreach (Guid id in studentIds)
+                {
+                    table.Rows.Add(id);
+                }
+
+                // object[] parameters = table.Cast<object>().ToArray();
+                object[] parameters = table.Rows.Cast<DataRow>()
+                        .SelectMany(row => row.ItemArray)
+                        .ToArray();
+
+                var jsonString = "{\"ID\": \"08BFC8F0-41D8-4490-B507-39911F5AFF0D\"}";
+                var studentGuid = JsonConvert.DeserializeObject<StudentGuid>(jsonString);
+
+                var idParam = new SqlParameter("@Student_id_list", studentGuid.ID);
+
+                var output = await _unitOfWork.SpOutput.ExecuteStoredProcedureAsync("getDataFromSP @Student_id_list", idParam);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
 	}
 }

@@ -27,7 +27,9 @@ namespace DatabaseAccess.Repository
 			Category = new CategoryRepository(_db);
 			FoodType = new FoodTypeRepository(_db);
 			MenuItem = new MenuItemRepository(_db);
-		}
+            SpOutput = new SpOutputRepository(_db);
+
+        }
 
 		/// <summary>
 		/// Accordingly you can list out every table repository over here
@@ -44,10 +46,12 @@ namespace DatabaseAccess.Repository
 		/// </summary>
 		public IMenuItemRepository MenuItem { get; private set; }
 
-		/// <summary>
-		/// to delte object
-		/// </summary>
-		public void Dispose()
+		public ISpOutputRepository SpOutput { get; set; }
+
+        /// <summary>
+        /// to delte object
+        /// </summary>
+        public void Dispose()
 		{
 			_db.Dispose();
 		}

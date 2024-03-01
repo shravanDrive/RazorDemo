@@ -11,6 +11,7 @@ namespace DatabaseAccess.Repository
 		ICategoryRepository Category { get; }
 		IFoodTypeRepository FoodType { get; }
 		IMenuItemRepository MenuItem { get; }
-		void Save();
+        ISpOutputRepository SpOutput { get; }
+        void Save();
 	}
 }
